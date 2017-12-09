@@ -7,7 +7,9 @@
 
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/OKrammusdb');
+mongoose.connect('mongodb://localhost/OKrammusdb', {
+    useMongoClient: true,
+});
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
