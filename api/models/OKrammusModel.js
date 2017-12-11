@@ -3,22 +3,29 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 
-var TaskSchema = new Schema({
+var ChampionSchema = new Schema({
     name: {
         type: String,
-        required: 'Kindly enter the name of the task'
+        required: 'Kindly enter the name of the champion'
     },
-    Created_date: {
+    created_date: {
         type: Date,
         default: Date.now
     },
-    status: {
+    size: {
+        type: Number,
+        default: 0
+    },
+    quotes: {
         type: [{
             type: String,
-            enum: ['pending', 'ongoing', 'completed']
         }],
-        default: ['pending']
+        default: []
+    },
+    flags: {
+        type: String,
+        default: "none"
     }
 });
 
-module.exports = mongoose.model('Tasks', TaskSchema);
+module.exports = mongoose.model('Champions', ChampionSchema);
