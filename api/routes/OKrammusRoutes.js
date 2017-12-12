@@ -9,7 +9,16 @@ module.exports = function (app) {
 
 
     app.route('/champions/:taskId')
-        .get(OKrammus.read_champion_quotes)
-        .put(OKrammus.replace_champion_quotes)
+        .get(OKrammus.read_champion_status)
+        .put(OKrammus.replace_champion_status)
         .delete(OKrammus.delete_a_champion);
+
+    app.route('/random')
+        .get(OKrammus.random_champion);
+
+    app.route('/random/:taskId')
+        .get(OKrammus.random_champions);
+
+    app.route('/specific/:taskId')
+        .get(OKrammus.specific_champion);
 };
