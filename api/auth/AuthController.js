@@ -23,12 +23,7 @@ exports.register_user = function (req, res) {
         });
 };
 
-exports.check_me = function (req, res) {
-    var token = req.headers['x-access-token'];
-    if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
-
-    jwt.verify(token, config.secret, function (err, decoded) {
-        if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+exports.check_me = function (req, res, next) {
 
         User.findById(decoded.id, { password: 0 }, function (err, user) {
             if (err) return res.status(500).send("There was a problem finding the user.");
@@ -36,7 +31,6 @@ exports.check_me = function (req, res) {
 
             res.status(200).send(user);
         });
-    });
 };
 
 exports.login = function (req, res) {

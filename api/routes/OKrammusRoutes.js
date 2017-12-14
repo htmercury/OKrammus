@@ -1,6 +1,7 @@
 ﻿'use strict';
 module.exports = function (app) {
     var OKrammus = require('../controllers/OKrammusController');
+    var VerifyToken = require('../auth/VerifyToken');
 
     // OKrammus Routes
     app.route('/champions')
@@ -37,7 +38,7 @@ module.exports = function (app) {
     app.route('/api/auth/register')
         .post(Auth.register_user);
     app.route('/api/auth/me')
-        .get(Auth.check_me);
+        .get(VerifyToken, Auth.check_me);
     app.route('/app/auth/login')
         .post(Auth.login);
 };
