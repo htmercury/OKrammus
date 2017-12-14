@@ -1,6 +1,10 @@
 {
   "name": "okrammus",
   "version": "1.0.0",
+  "engines": {
+    "node": "8.9.3",
+    "npm" : "5.6.0"
+  },
   "description": "Generate a random quote from a LoL champion",
   "main": "index.js",
   "scripts": {
