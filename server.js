@@ -11,7 +11,7 @@
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGODB_URI, {
-    useMongoClient: true,
+    useMongoClient: true
 });
 
 
@@ -31,5 +31,5 @@ console.log('OKrammus RESTful API server started on: ' + port);
 module.exports = app;
 
 app.use(function (req, res) {
-    res.status(404).send({ url: req.originalUrl + ' not found' })
+    res.status(404).send({ url: req.originalUrl + ' not found' });
 });

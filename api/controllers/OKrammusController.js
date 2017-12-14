@@ -95,9 +95,9 @@ function translate_champion(s)
     var result = s[0].toUpperCase();
     for (var i = 1; i < temp.length; i++)
     {
-        if (temp[i] == ".")
+        if (temp[i] === ".")
             continue;
-        else if (temp[i] == "-")
+        else if (temp[i] === "-")
         {
             result += " ";
             result += temp[i + 1].toUpperCase();

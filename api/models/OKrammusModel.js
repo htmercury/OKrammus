@@ -15,7 +15,7 @@ var ChampionSchema = new Schema({
     },
     quotes: {
         type: [{
-            type: String,
+            type: String
         }],
         default: []
     },

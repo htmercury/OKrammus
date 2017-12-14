@@ -14,7 +14,8 @@ exports.register_user = function (req, res) {
         password: hashedPassword
     },
         function (err, user) {
-            if (err) return res.status(500).send("There was a problem registering the user. Either username was used or bad password.")
+            if (err)
+                return res.status(500).send("There was a problem registering the user. Either username was used or bad password.");
             // create a token
             var token = jwt.sign({ id: user._id }, config.secret, {
                 expiresIn: 86400 // expires in 24 hours
