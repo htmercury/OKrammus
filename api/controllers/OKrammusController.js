@@ -82,9 +82,31 @@ exports.random_champions = function (req, res) {
 };
 
 exports.specific_champion = function (req, res) {
-    Task.find({name : req.params.taskId}, function (err, task) {
+    Task.find({name : translate_champion(req.params.taskId)}, function (err, task) {
         if (err)
             res.send(err);
         res.json(task);
     });
 };
+
+function translate_champion(s)
+{
+    var temp = s.toLowerCase().split("");
+    var result = s[0].toUpperCase();
+    for (var i = 1; i < temp.length; i++)
+    {
+        if (temp[i] == ".")
+            continue;
+        else if (temp[i] == "-")
+        {
+            result += " ";
+            result += temp[i + 1].toUpperCase();
+            i++;
+        }
+        else
+            result += temp[i];
+    }
+
+    return result;
+
+}
