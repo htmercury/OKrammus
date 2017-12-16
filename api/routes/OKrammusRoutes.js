@@ -4,6 +4,11 @@ module.exports = function (app) {
     var VerifyToken = require('../auth/VerifyToken');
     var VerifyAdmin = require('../auth/VerifyAdmin');
 
+    app.route('/')
+        .get(function (req, res) {
+            res.redirect('https://htmercury.github.io/okrammus');
+        });
+
     // OKrammus Routes
     app.route('/champions')
         .get(OKrammus.list_all_champions)
