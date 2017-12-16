@@ -1,4 +1,5 @@
 var User = require('./User');
+var bcrypt = require('bcryptjs');
 
 // CREATES A NEW USER
 exports.create_new_user = function (req, res) {
@@ -18,6 +19,18 @@ exports.return_all_users = function (req, res) {
     User.find({}, { password: 0 }, function (err, users) {
         if (err) return res.status(500).send("There was a problem finding the users.");
         res.status(200).send(users);
+    });
+};
+
+// UPDATES THE USER ASSOCIATED WITH THE GIVEN TOKEN
+exports.update_me = function (req, res, next) {
+    var hashedPassword = bcrypt.hashSync(req.body.password, 8);
+    req.body.password = hashedPassword;
+    if (req.body.email)
+        delete req.body.email;
+    User.findByIdAndUpdate(req.userId, req.body, { new: true }, function (err, user) {
+        if (err) return res.status(500).send("There was a problem updating the user.");
+        res.status(200).send(user);
     });
 };
 

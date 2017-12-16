@@ -29,6 +29,8 @@ module.exports = function (app) {
     var User = require('../user/UserController');
     app.route('/users')
         .get(User.return_all_users);
+    app.route('/users/me')
+        .put(VerifyToken, User.update_me);
     app.route('/users/:id')
         .get(User.get_this_user)
         .delete(VerifyToken, VerifyAdmin, User.delete_this_user)
