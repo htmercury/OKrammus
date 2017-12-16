@@ -6,7 +6,7 @@ module.exports = function (app) {
 
     app.route('/')
         .get(function (req, res) {
-            res.redirect('https://htmercury.github.io/okrammus');
+            res.redirect('https://htmercury.github.io/OKrammus/');
         });
 
     // OKrammus Routes
