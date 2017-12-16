@@ -1,7 +1,7 @@
 var User = require('./User');
 
 // CREATES A NEW USER
-exports.create_new_user = function (req, res, next) {
+exports.create_new_user = function (req, res) {
     User.create({
         name: req.body.name,
         email: req.body.email,
@@ -23,7 +23,7 @@ exports.return_all_users = function (req, res) {
 
 // GETS A SINGLE USER FROM THE DATABASE
 exports.get_this_user = function (req, res) {
-    User.findById(req.params.id, function (err, user) {
+    User.findById(req.params.id, { password: 0 }, function (err, user) {
         if (err) return res.status(500).send("There was a problem finding the user.");
         if (!user) return res.status(404).send("No user found.");
         res.status(200).send(user);

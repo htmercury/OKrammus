@@ -60,6 +60,8 @@ exports.random_champion = function (req, res) {
     });
 };
 
+//exports.random_champion_quote = function (req, res) {};
+
 
 exports.random_champions = function (req, res) {
     Task.find({}, function (err, task) {

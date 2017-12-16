@@ -18,7 +18,7 @@ exports.register_user = function (req, res, next) {
                 return res.status(500).send("There was a problem registering the user. Either username was used or bad password.");
             // create a token
             var token = jwt.sign({ id: user._id }, config.secret, {
-                expiresIn: 86400 // expires in 24 hours
+                expiresIn: 43200 // expires in 12 hours
             });
             res.status(200).send({ auth: true, token: token });
         });
@@ -26,7 +26,7 @@ exports.register_user = function (req, res, next) {
 
 exports.check_me = function (req, res, next) {
 
-        User.findById(decoded.id, { password: 0 }, function (err, user) {
+        User.findById(req.userId, { password: 0 }, function (err, user) {
             if (err) return res.status(500).send("There was a problem finding the user.");
             if (!user) return res.status(404).send("No user found.");
 

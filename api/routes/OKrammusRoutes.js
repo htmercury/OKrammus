@@ -2,6 +2,7 @@
 module.exports = function (app) {
     var OKrammus = require('../controllers/OKrammusController');
     var VerifyToken = require('../auth/VerifyToken');
+    var VerifyAdmin = require('../auth/VerifyAdmin');
 
     // OKrammus Routes
     app.route('/champions')
@@ -27,16 +28,15 @@ module.exports = function (app) {
 
     var User = require('../user/UserController');
     app.route('/users')
-        .post(VerifyToken, User.create_new_user)
         .get(User.return_all_users);
     app.route('/users/:id')
         .get(User.get_this_user)
-        .delete(VerifyToken, User.delete_this_user)
-        .put(VerifyToken, User.update_this_user);
+        .delete(VerifyToken, VerifyAdmin, User.delete_this_user)
+        .put(VerifyToken, VerifyAdmin, User.update_this_user);
 
     var Auth = require('../auth/AuthController');
     app.route('/api/auth/register')
-        .post(VerifyToken, Auth.register_user);
+        .post(VerifyToken, VerifyAdmin, Auth.register_user);
     app.route('/api/auth/me')
         .get(VerifyToken, Auth.check_me);
     app.route('/app/auth/login')
