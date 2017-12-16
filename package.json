@@ -1,6 +1,6 @@
 {
   "name": "okrammus",
-  "version": "1.0.0",
+  "version": "1.2.6",
   "engines": {
     "node": "8.9.3",
     "npm": "5.6.0"
