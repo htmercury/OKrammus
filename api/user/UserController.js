@@ -1,7 +1,7 @@
 var User = require('./User');
 
 // CREATES A NEW USER
-exports.create_new_user = function (req, res) {
+exports.create_new_user = function (req, res, next) {
     User.create({
         name: req.body.name,
         email: req.body.email,
@@ -15,7 +15,7 @@ exports.create_new_user = function (req, res) {
 
 // RETURNS ALL THE USERS IN THE DATABASE
 exports.return_all_users = function (req, res) {
-    User.find({}, function (err, users) {
+    User.find({}, { password: 0 }, function (err, users) {
         if (err) return res.status(500).send("There was a problem finding the users.");
         res.status(200).send(users);
     });
@@ -31,7 +31,7 @@ exports.get_this_user = function (req, res) {
 };
 
 // DELETES A USER FROM THE DATABASE
-exports.delete_this_user = function (req, res) {
+exports.delete_this_user = function (req, res, next) {
     User.findByIdAndRemove(req.params.id, function (err, user) {
         if (err) return res.status(500).send("There was a problem deleting the user.");
         res.status(200).send("User: " + user.name + " was deleted.");
@@ -39,7 +39,7 @@ exports.delete_this_user = function (req, res) {
 };
 
 // UPDATES A SINGLE USER IN THE DATABASE
-exports.update_this_user = function (req, res) {
+exports.update_this_user = function (req, res, next) {
     User.findByIdAndUpdate(req.params.id, req.body, { new: true }, function (err, user) {
         if (err) return res.status(500).send("There was a problem updating the user.");
         res.status(200).send(user);

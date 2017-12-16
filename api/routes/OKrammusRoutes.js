@@ -6,13 +6,13 @@ module.exports = function (app) {
     // OKrammus Routes
     app.route('/champions')
         .get(OKrammus.list_all_champions)
-        .post(OKrammus.create_a_champion);
+        .post(VerifyToken, OKrammus.create_a_champion);
 
 
     app.route('/champions/:taskId')
         .get(OKrammus.read_champion_status)
-        .put(OKrammus.replace_champion_status)
-        .delete(OKrammus.delete_a_champion);
+        .put(VerifyToken, OKrammus.replace_champion_status)
+        .delete(VerifyToken, OKrammus.delete_a_champion);
 
     app.route('/random')
         .get(OKrammus.random_champion);
@@ -27,16 +27,16 @@ module.exports = function (app) {
 
     var User = require('../user/UserController');
     app.route('/users')
-        .post(User.create_new_user)
+        .post(VerifyToken, User.create_new_user)
         .get(User.return_all_users);
     app.route('/users/:id')
         .get(User.get_this_user)
-        .delete(User.delete_this_user)
-        .put(User.update_this_user);
+        .delete(VerifyToken, User.delete_this_user)
+        .put(VerifyToken, User.update_this_user);
 
     var Auth = require('../auth/AuthController');
     app.route('/api/auth/register')
-        .post(Auth.register_user);
+        .post(VerifyToken, Auth.register_user);
     app.route('/api/auth/me')
         .get(VerifyToken, Auth.check_me);
     app.route('/app/auth/login')

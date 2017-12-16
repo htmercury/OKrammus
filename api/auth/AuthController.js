@@ -4,7 +4,7 @@ var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
 var config = require('../../config');
 
-exports.register_user = function (req, res) {
+exports.register_user = function (req, res, next) {
 
     var hashedPassword = bcrypt.hashSync(req.body.password, 8);
 

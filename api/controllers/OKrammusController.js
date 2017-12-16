@@ -13,7 +13,7 @@ exports.list_all_champions = function (req, res) {
 };
 
 
-exports.create_a_champion = function (req, res) {
+exports.create_a_champion = function (req, res, next) {
     var new_task = new Task(req.body);
     new_task.save(function (err, task) {
         if (err)
@@ -32,7 +32,7 @@ exports.read_champion_status = function (req, res) {
 };
 
 
-exports.replace_champion_status = function (req, res) {
+exports.replace_champion_status = function (req, res, next) {
     Task.findOneAndUpdate({ _id: req.params.taskId }, req.body, { new: true }, function (err, task) {
         if (err)
             res.send(err);
@@ -41,7 +41,7 @@ exports.replace_champion_status = function (req, res) {
 };
 
 
-exports.delete_a_champion = function (req, res) {
+exports.delete_a_champion = function (req, res, next) {
     Task.remove({
         _id: req.params.taskId
     }, function (err, task) {
