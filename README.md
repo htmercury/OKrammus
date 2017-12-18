@@ -1,2 +1,3 @@
 # OKrammus
-Generate a random quote from a LoL champion
+This is a RESTful API made with node.js, express.js, mongoose, and mongoDB.
+Generate a random quote from a LoL champion.
