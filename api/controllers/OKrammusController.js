@@ -4,8 +4,16 @@
 var mongoose = require('mongoose'),
     Task = mongoose.model('Champions');
 
-exports.list_all_champions = function (req, res) {
+exports.list_all_fields = function (req, res) {
     Task.find({}, function (err, task) {
+        if (err)
+            res.send(err);
+        res.json(task);
+    });
+};
+
+exports.list_all_champions = function (req, res) {
+    Task.find({}, {_id: 0, __v: 0, flags: 0, created_date: 0} ,function (err, task) {
         if (err)
             res.send(err);
         res.json(task);
@@ -53,7 +61,7 @@ exports.delete_a_champion = function (req, res, next) {
 
 
 exports.random_champion = function (req, res) {
-    Task.find({}, function (err, task) {
+    Task.find({}, {_id: 0, __v: 0, flags: 0, created_date: 0}, function (err, task) {
         if (err)
             res.send(err);
         res.json(task[Math.floor(Math.random() * task.length)]);
@@ -64,7 +72,7 @@ exports.random_champion = function (req, res) {
 
 
 exports.random_champions = function (req, res) {
-    Task.find({}, function (err, task) {
+    Task.find({}, {_id: 0, __v: 0, flags: 0, created_date: 0}, function (err, task) {
         if (err)
             res.send(err);
         var used = [];
@@ -84,7 +92,8 @@ exports.random_champions = function (req, res) {
 };
 
 exports.specific_champion = function (req, res) {
-    Task.find({name : translate_champion(req.params.taskId)}, function (err, task) {
+    Task.find({ name: translate_champion(req.params.taskId) }, {
+        _id: 0, __v: 0, flags: 0, created_date: 0}, function (err, task) {
         if (err)
             res.send(err);
         res.json(task);

@@ -10,10 +10,12 @@ module.exports = function (app) {
         });
 
     // OKrammus Routes
+    app.route('/all')
+        .get(VerifyToken, OKrammus.list_all_fields);
+
     app.route('/champions')
         .get(OKrammus.list_all_champions)
         .post(VerifyToken, OKrammus.create_a_champion);
-
 
     app.route('/champions/:taskId')
         .get(OKrammus.read_champion_status)
