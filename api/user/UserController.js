@@ -16,7 +16,7 @@ exports.create_new_user = function (req, res) {
 
 // RETURNS ALL THE USERS IN THE DATABASE
 exports.return_all_users = function (req, res) {
-    User.find({}, { _id: 0, __v: 0, password: 0 }, function (err, users) {
+    User.find({}, { __v: 0, password: 0 }, function (err, users) {
         if (err) return res.status(500).send("There was a problem finding the users.");
         res.status(200).send(users);
     });
@@ -36,7 +36,7 @@ exports.update_me = function (req, res, next) {
 
 // GETS A SINGLE USER FROM THE DATABASE
 exports.get_this_user = function (req, res) {
-    User.findById(req.params.id, { password: 0 }, function (err, user) {
+    User.findById(req.params.id, {__v: 0, password: 0 }, function (err, user) {
         if (err) return res.status(500).send("There was a problem finding the user.");
         if (!user) return res.status(404).send("No user found.");
         res.status(200).send(user);
