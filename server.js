@@ -1,6 +1,7 @@
 ﻿var express = require('express'),
     app = express(),
     port = process.env.PORT || 3000,
+    ip = process.env.IP || '0.0.0.0',
     mongoose = require('mongoose'),
     Champions = require('./api/models/OKrammusModel'), //created model loading here
     bodyParser = require('body-parser');
@@ -23,7 +24,7 @@ var routes = require('./api/routes/OKrammusRoutes'); //importing route
 routes(app); //register the route
 
 
-app.listen(port);
+app.listen(port, ip);
 
 
 console.log('OKrammus RESTful API server started on: ' + port);
