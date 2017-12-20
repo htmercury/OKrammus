@@ -30,6 +30,7 @@
     "express": "^4.16.2",
     "jsonwebtoken": "^8.1.0",
     "mongoose": "^4.13.6",
+    "newrelic": "^2.4.2",
     "nodemon": "^1.12.5"
   }
 }
