@@ -4,6 +4,7 @@
     ip = process.env.IP || '0.0.0.0',
     mongoose = require('mongoose'),
     Champions = require('./api/models/OKrammusModel'), //created model loading here
+    newrelic = require('newrelic'),
     bodyParser = require('body-parser');
 
 
