@@ -19,6 +19,14 @@ var ChampionSchema = new Schema({
         }],
         default: []
     },
+    image: {
+        type:  String,
+        default: ""
+    },
+    direction: {
+        type: String,
+        default: ""
+    },
     flags: {
         type: String,
         default: "none"
