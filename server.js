@@ -1,5 +1,4 @@
-﻿require('newrelic');
-
+﻿var cors = require('cors');
 var express = require('express'),
     app = express(),
     port = process.env.PORT || 3000,
@@ -20,6 +19,8 @@ mongoose.connect(process.env.MONGODB_URI, {
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.use(cors({ credentials: true, origin: true }));
 
 
 var routes = require('./api/routes/OKrammusRoutes'); //importing route
